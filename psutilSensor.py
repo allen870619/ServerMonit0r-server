@@ -39,11 +39,11 @@ def getMemUsage():
     return psutil.virtual_memory().percent
 
 
-# network
+# network, Mbits
 def getDLSpeed():
     global preDL
     curDL = psutil.net_io_counters().bytes_recv/1024/1024*8
-    netDL = '%.2f' % (curDL - preDL)
+    netDL = curDL - preDL
     preDL = curDL
     return netDL
 
@@ -51,7 +51,7 @@ def getDLSpeed():
 def getULSpeed():
     global preUL
     curUL = psutil.net_io_counters().bytes_sent/1024/1024*8
-    netUL = '%.2f' % (curUL - preUL)
+    netUL = curUL - preUL
     preUL = curUL
     return netUL
 

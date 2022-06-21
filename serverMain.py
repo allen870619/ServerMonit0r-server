@@ -1,3 +1,4 @@
+from datetime import datetime
 import socket
 import threading
 import json
@@ -13,10 +14,6 @@ server.bind((host, port))
 server.setblocking(True)
 server.listen(10)
 
-# psutil variable
-preUp = 0
-preDw = 0
-
 dataPack = {}
 cpu = {}
 mem = {}
@@ -24,14 +21,12 @@ net = {}
 other = {}
 
 def sendData(client):
-    global preDw, preUp
-
     dataPack["cpu"] = cpu
     dataPack["mem"] = mem
     dataPack["net"] = net
     dataPack["other"] = other
     dataPack["info"] = psTool.getComputerInfo()
-
+    lastCall = None
     running = True
     runFirst = True
     while running:
@@ -48,14 +43,19 @@ def sendData(client):
             netDL  = psTool.getDLSpeed()
             netUL  = psTool.getULSpeed()
             upTime = psTool.getUptime()
+            if lastCall != None:
+                timeDelta = (datetime.now() - lastCall).seconds
+            else:
+                timeDelta = 1
+            lastCall = datetime.now()
     
             # json packet
             cpu["cpuUsage"] = cpuUsage
             cpu["cpuTemp"] = cpuTemp
             cpu["cpuFreq"] = cpuFreq
             mem["memUsage"] = memUsage
-            net["netDownload"] = netDL
-            net["netUpload"] = netUL
+            net["netDownload"] = netDL/timeDelta
+            net["netUpload"] = netUL/timeDelta
             other["upTime"] = str(upTime)
         
             client.sendall(json.dumps(dataPack).encode('utf-8'))
