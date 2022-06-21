@@ -19,7 +19,6 @@ def getCpuTemp():
     # cpu temp
     try:
         cpuTemp = psutil.sensors_temperatures()['coretemp'][0].current
-        print(psutil.sensors_temperatures(), flush=True)
     except AttributeError:
         cpuTemp = -1000
     return cpuTemp
