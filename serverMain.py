@@ -3,10 +3,13 @@ import socket
 import threading
 import json
 import psutilSensor as psTool
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # server config
-host = "127.0.0.1"
-port = 9943
+host = os.getenv('HOST')
+port = int(os.getenv('PORT'))
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
