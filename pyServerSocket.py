@@ -1,8 +1,5 @@
 import socket
 import threading
-from time import sleep
-import datetime
-import time
 import json
 import psutilSensor as psTool
 
