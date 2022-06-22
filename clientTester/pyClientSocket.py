@@ -5,8 +5,8 @@ PORT = 9943
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((HOST, PORT))
-print(s.getpeername())
+print(s.getpeername(), flush=True)
 
 while True:
     serverMessage = str(s.recv(1024), encoding='utf-8')
-    print(serverMessage)
+    print(serverMessage, flush=True)

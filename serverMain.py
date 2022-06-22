@@ -66,10 +66,10 @@ def sendData(client):
         except socket.error:
             running = False
     client.close()
-    print("disconnected")
+    print("disconnected", flush=True)
 
 while True:
-    print("wait...")
+    print("wait...", flush=True)
     client, addr = server.accept()
-    print('Connected by ', addr[0])
+    print('Connected by ', addr[0], flush=True)
     threading._start_new_thread(sendData, (client,))
