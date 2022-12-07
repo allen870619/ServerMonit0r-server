@@ -1,0 +1,3 @@
+MacTmp
+python-dotenv
+psutil

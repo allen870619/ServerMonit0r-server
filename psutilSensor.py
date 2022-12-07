@@ -2,6 +2,8 @@ import psutil
 import datetime
 import time
 import math
+import MacTmp
+import platform
 
 preDL = 0
 preUL = 0
@@ -14,29 +16,30 @@ def getCpuUsage():
     # cpuUsageFree = psutil.cpu_times_percent().idle
     return cpuUsage
 
-# Only on Linux
+# Only on Linux, MacOS
 def getCpuTemp():
     # cpu temp
     try:
-        cpuTemp = psutil.sensors_temperatures()['coretemp'][0].current
+        if platform.system() == "Darwin":
+            cpuTemp = MacTmp.CPU_Temp()
+        else:
+            cpuTemp = psutil.sensors_temperatures()['coretemp'][0].current
     except AttributeError:
-        cpuTemp = -1000
+        cpuTemp = None
     return cpuTemp
 
 
 def getCpuFreq(mode):
-    if(mode == 0):
+    if (mode == 0):
         return psutil.cpu_freq(percpu=False).current
-    elif(mode == 1):
+    elif (mode == 1):
         return psutil.cpu_freq(percpu=False).min
-    elif(mode == 2):
+    elif (mode == 2):
         return psutil.cpu_freq(percpu=False).max
-
 
 # mem
 def getMemUsage():
     return psutil.virtual_memory().percent
-
 
 # network, Mbits
 def getDLSpeed():

@@ -10,12 +10,14 @@ load_dotenv()
 # server config
 host = os.getenv('HOST')
 port = int(os.getenv('PORT'))
+maxUsr = int(os.getenv('MAX_USR'))
 
+# server setup
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 server.bind((host, port))
 server.setblocking(True)
-server.listen(10)
+server.listen(maxUsr)
 
 dataPack = {}
 cpu = {}
