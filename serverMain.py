@@ -5,6 +5,8 @@ import json
 import psutilSensor as psTool
 import os
 from dotenv import load_dotenv
+from app import runApp
+
 load_dotenv()
 
 # server config
@@ -69,6 +71,9 @@ def sendData(client):
             running = False
     client.close()
     print("disconnected", flush=True)
+
+# initial 
+threading._start_new_thread(runApp())
 
 while True:
     print("wait...", flush=True)

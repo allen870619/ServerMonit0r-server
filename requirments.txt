@@ -1,3 +1,5 @@
 MacTmp
 python-dotenv
 psutil
+Flask
+waitress
