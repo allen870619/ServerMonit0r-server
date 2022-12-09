@@ -1,7 +1,7 @@
 from flask import Flask
 import os
 from dotenv import load_dotenv
-from systemReader import os_data, cpu_data, memory_data
+from flaskModule.systemReader import os_data, cpu_data, memory_data
 
 # mode setup
 load_dotenv()
@@ -12,9 +12,11 @@ __main__ = "FORMAL"
 __dev__ = "DEV"
 app = Flask(mode)
 
+
 @app.route("/")
 def hello():
     return "It works!"
+
 
 @app.route("/systemInfo")
 def system_info():
@@ -23,6 +25,7 @@ def system_info():
     mainDict["cpu"] = cpu_data()
     mainDict["memory"] = memory_data()
     return mainDict
+
 
 @app.route("/systemInfo/<mode>")
 def system_info_single(mode):
@@ -35,6 +38,8 @@ def system_info_single(mode):
     return {}
 
 # Init
+
+
 def run_app():
     global app
     if mode == __main__:
@@ -42,4 +47,6 @@ def run_app():
         serve(app, port=port)
     elif mode == __dev__:
         app.run(port=devPort)
+
+
 run_app()

@@ -2,7 +2,7 @@ import socket
 import threading
 import os
 from dotenv import load_dotenv
-from flask.app import runApp
+from flaskModule.app import run_app
 from socketData import socket_send_data
 
 load_dotenv()
@@ -19,9 +19,9 @@ server.bind((host, port))
 server.setblocking(True)
 server.listen(maxUsr)
 
-# initial 
+# initial
 # restful flask framework
-threading._start_new_thread(runApp())
+threading._start_new_thread(run_app())
 
 # socket
 while True:
