@@ -21,7 +21,7 @@ server.listen(maxUsr)
 
 # initial
 # restful flask framework
-threading._start_new_thread(run_app())
+threading._start_new_thread(run_app, ())
 
 # socket
 while True:

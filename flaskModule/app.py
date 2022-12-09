@@ -42,11 +42,10 @@ def system_info_single(mode):
 
 def run_app():
     global app
+    print("Starting Flask module ...", flush=True)
     if mode == __main__:
         from waitress import serve
         serve(app, port=port)
     elif mode == __dev__:
         app.run(port=devPort)
-
-
-run_app()
+    
