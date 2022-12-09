@@ -1,7 +1,7 @@
 import platform
 from cpuinfo import get_cpu_info
 import psutil
-import flaskModule.utilities as utilities
+import utilities as utilities
 
 """_summary_
 osType
@@ -57,7 +57,7 @@ def cpu_data():
     cpuDict["logicalCore"] = psutil.cpu_count(logical=True)
 
     if "l1_data_cache_size" in rawList.keys():
-        cpuDict["l1Cache"] = rawList["l1_data_cache_size"]
+        cpuDict["l1Cache"] = utilities.get_size(rawList["l1_data_cache_size"])
     if "l2_cache_size" in rawList.keys():
         cpuDict["l2Cache"] = utilities.get_size(rawList["l2_cache_size"])
     if "l3_cache_size" in rawList.keys():
