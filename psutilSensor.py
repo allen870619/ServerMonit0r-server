@@ -23,10 +23,10 @@ def getCpuTemp():
         if platform.system() == "Darwin":
             cpuTemp = MacTmp.CPU_Temp()
         else:
-            cpuTemp = psutil.sensors_temperatures()['coretemp'][0].current
+            cpuTemp = eval(psutil.sensors_temperatures()['coretemp'][0].current)
     except AttributeError:
-        cpuTemp = None
-    return cpuTemp
+        return None
+    return float(cpuTemp)
 
 
 def getCpuFreq(mode):
@@ -63,13 +63,3 @@ def getUptime():
     rawUptime = math.floor(now - psutil.boot_time())
     return datetime.timedelta(seconds=rawUptime)
 
-# info
-def getComputerInfo():
-    data = {}
-    cpuCore = psutil.cpu_count(logical=False)
-    cpuThread = psutil.cpu_count(logical=True)
-    memTotal = psutil.virtual_memory().total/1024/1024
-    data["cpuCore"] = cpuCore
-    data["cpuThread"] = cpuThread
-    data["memTotal"] = memTotal
-    return data
