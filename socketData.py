@@ -25,6 +25,8 @@ def socket_send_data(client):
                 timeDelta = (datetime.now() - lastCall).seconds
             else:
                 timeDelta = 1
+            if timeDelta == 0 :
+                timeDelta = 1
             lastCall = datetime.now()
             
             cpuTemp = psTool.getCpuTemp()

@@ -23,10 +23,11 @@ def getCpuTemp():
         if platform.system() == "Darwin":
             cpuTemp = MacTmp.CPU_Temp()
         else:
-            cpuTemp = eval(psutil.sensors_temperatures()['coretemp'][0].current)
+            cpuTemp = eval(psutil.sensors_temperatures()
+                           ['coretemp'][0].current)
+        return float(cpuTemp)
     except AttributeError:
         return None
-    return float(cpuTemp)
 
 
 def getCpuFreq(mode):
@@ -38,13 +39,17 @@ def getCpuFreq(mode):
         return psutil.cpu_freq(percpu=False).max
 
 # mem
+
+
 def getMemUsage():
     return psutil.virtual_memory().percent
 
 # network, Mbits
+
+
 def getDLSpeed():
     global preDL
-    curDL = psutil.net_io_counters().bytes_recv/1024/1024*8
+    curDL = psutil.net_io_counters().bytes_recv
     netDL = curDL - preDL
     preDL = curDL
     return netDL
@@ -52,14 +57,15 @@ def getDLSpeed():
 
 def getULSpeed():
     global preUL
-    curUL = psutil.net_io_counters().bytes_sent/1024/1024*8
+    curUL = psutil.net_io_counters().bytes_sent
     netUL = curUL - preUL
     preUL = curUL
     return netUL
 
 # uptime
+
+
 def getUptime():
     now = time.time()
     rawUptime = math.floor(now - psutil.boot_time())
     return datetime.timedelta(seconds=rawUptime)
-
