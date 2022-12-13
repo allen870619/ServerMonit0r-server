@@ -6,8 +6,7 @@
 
 ## Requirments
 ```
-pip3 install psutil
-pip3 install python-dotenv
+pip3 install -r requirments.txt
 ```
 
 ## Knowning Issue

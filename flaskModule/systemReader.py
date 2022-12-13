@@ -18,6 +18,7 @@ def os_data():
     osDict = {}
     osDict["osType"] = platform.uname().system
 
+    osDict["osVerion"] = None
     if platform.system() == "Darwin":
         osDict["osVerion"] = platform.mac_ver()[0]
     elif platform.system() == "Java":
@@ -56,6 +57,9 @@ def cpu_data():
     cpuDict["physicalCore"] = psutil.cpu_count(logical=False)
     cpuDict["logicalCore"] = psutil.cpu_count(logical=True)
 
+    cpuDict["l1Cache"] = None
+    cpuDict["l2Cache"] = None
+    cpuDict["l3Cache"] = None
     if "l1_data_cache_size" in rawList.keys():
         cpuDict["l1Cache"] = utilities.get_size(rawList["l1_data_cache_size"])
     if "l2_cache_size" in rawList.keys():
@@ -63,6 +67,8 @@ def cpu_data():
     if "l3_cache_size" in rawList.keys():
         cpuDict["l3Cache"] = utilities.get_size(rawList["l3_cache_size"])
 
+    cpuDict["hardware"] = None
+    cpuDict["vendor"] = None
     if "hardware_raw" in rawList.keys():
         cpuDict["hardware"] = rawList["hardware_raw"]
     if "vendor_id_raw" in rawList.keys():
@@ -71,6 +77,19 @@ def cpu_data():
 
     return utilities.emptyNullDict(cpuDict)
 
+
+    """_summary_
+    ramVirtual
+    ramSwap
+    -disk
+    --device
+    --mount
+    --fstype
+    --diskTotal?
+    --diskUsed?
+    --diskFree?
+    --diskPercent: Double?
+    """
 
 def memory_data():
     memDict = {}
@@ -86,6 +105,10 @@ def memory_data():
         part["device"] = partition.device
         part["mount"] = partition.mountpoint
         part["fstype"] = partition.fstype
+        part["diskTotal"] = None
+        part["diskUsed"] = None
+        part["diskFree"] = None
+        part["diskPercent"] = None
         try:
             usage = psutil.disk_usage(partition.mountpoint)
         except PermissionError:
