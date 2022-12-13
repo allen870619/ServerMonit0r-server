@@ -23,7 +23,7 @@ def getCpuTemp():
         if platform.system() == "Darwin":
             cpuTemp = MacTmp.CPU_Temp()
         else:
-            cpuTemp = eval(psutil.sensors_temperatures()['coretemp'][0].current)
+            cpuTemp = psutil.sensors_temperatures()['coretemp'][0].current
         return float(cpuTemp)
     except AttributeError:
         return None
