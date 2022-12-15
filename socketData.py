@@ -49,6 +49,7 @@ def socket_send_data(client):
             dataPack["mem"] = mem
             dataPack["net"] = net
             dataPack["other"] = other
+            dataPack["timestamp"] = datetime.now().timestamp()
         
             client.sendall(json.dumps(dataPack).encode('utf-8'))
 

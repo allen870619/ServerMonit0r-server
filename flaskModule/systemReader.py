@@ -114,10 +114,10 @@ def memory_data():
         except PermissionError:
             disk.append(part)
             continue
-        part["diskTotal"] = utilities.get_size(usage.total)
         part["diskUsed"] = utilities.get_size(usage.used)
         part["diskFree"] = utilities.get_size(usage.free)
         part["diskPercent"] = usage.percent
+        part["diskTotal"] = utilities.get_size(usage.total)
         disk.append(part)
     memDict["disk"] = disk
 
