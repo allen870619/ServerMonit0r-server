@@ -24,8 +24,6 @@ def getCpuTemp():
             cpuTemp = MacTmp.CPU_Temp()
         else:
             cpuTemp = psutil.sensors_temperatures()['coretemp'][0].current
-        if " " in cpuTemp:
-            cpuTemp = cpuTemp.split(" ")[0]
         return float(cpuTemp)
     except:
         return None
