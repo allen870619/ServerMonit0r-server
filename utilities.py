@@ -1,10 +1,13 @@
 def get_size(byte):
-    factor = 1024
-    for unit in ["", "K", "M", "G", "T", "P"]:
-        if byte < factor:
-            return f"{byte:.2f}{unit}B"
-        byte /= factor
-    return f"{byte:.2f}PB"
+    try:
+        factor = 1024
+        for unit in ["", "K", "M", "G", "T", "P"]:
+            if byte < factor:
+                return f"{byte:.2f}{unit}B"
+            byte /= factor
+        return f"{byte:.2f}PB"
+    except:
+        return str(byte)
 
 
 def emptyNullDict(dict):
