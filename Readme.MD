@@ -5,6 +5,15 @@
 ### This is the server end of [ServerMonit0r](https://github.com/allen870619/ServerMonit0r) written by Python.
 
 ## Usage
+### Whole Steps
+```
+git clone https://github.com/allen870619/ServerMonit0r-server.git
+cd ServerMonit0r-server
+pip3 install -r requirments.txt
+cp .env.example .env
+sudo python3 serverMain.py
+```
+
 ### Install
 ```
 pip3 install -r requirments.txt
