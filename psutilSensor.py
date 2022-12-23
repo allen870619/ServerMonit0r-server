@@ -50,6 +50,9 @@ def getDLSpeed():
     global preDL
     curDL = psutil.net_io_counters().bytes_recv
     netDL = curDL - preDL
+    if preDL == 0:
+        preDL = curDL
+        return 0
     preDL = curDL
     return netDL
 
@@ -58,6 +61,9 @@ def getULSpeed():
     global preUL
     curUL = psutil.net_io_counters().bytes_sent
     netUL = curUL - preUL
+    if preUL == 0:
+        preUL = curUL
+        return 0
     preUL = curUL
     return netUL
 
@@ -67,4 +73,4 @@ def getULSpeed():
 def getUptime():
     now = time.time()
     rawUptime = math.floor(now - psutil.boot_time())
-    return datetime.timedelta(seconds=rawUptime)
+    return str(rawUptime)
